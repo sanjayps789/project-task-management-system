@@ -18,11 +18,9 @@ axios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // Token/Data clear cheyyunnu
       localStorage.clear();
       sessionStorage.clear();
       
-      // Ippo user login page-il allengil mathram redirect cheyyuka (Loop avoid cheyyan)
       if (!window.location.pathname.includes("/login")) {
         window.location.href = "/login";
       }
