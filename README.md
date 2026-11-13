@@ -65,7 +65,7 @@ cd frontend
 npm install
 
 Create a .env file in the frontend folder if needed for API base URL:
-VITE_API_BASE_URL=http://localhost:5000/api
+SERVER_API_URL=http://localhost:5000/api
 
 Run the frontend development server:
 
