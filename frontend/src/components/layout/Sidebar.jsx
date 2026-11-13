@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/slices/authSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const menus = [
     {
@@ -33,6 +33,17 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (isSidebarOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [isSidebarOpen]);
+
     const handleNavigate = () => {
         setIsSidebarOpen(false);
     };
@@ -49,24 +60,24 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             dispatch(logout());
 
             navigate("/login", { replace: true });
-        }, 1000); 
+        }, 1000);
     };
+
+
 
     return (
         <>
             {/* Mobile Overlay */}
             <div
                 onClick={() => setIsSidebarOpen(false)}
-                className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-                    isSidebarOpen ? "visible opacity-100" : "invisible opacity-0"
-                }`}
+                className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${isSidebarOpen ? "visible opacity-100" : "invisible opacity-0"
+                    }`}
             />
 
             {/* Sidebar */}
             <aside
-                className={`fixed top-0 left-0 z-50 flex h-screen w-64 flex-col border-r border-border bg-card transition-transform duration-300 ease-in-out lg:static ${
-                    isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-                }`}
+                className={`fixed top-0 left-0 z-50 flex h-screen lg:w-64 w-[90%] flex-col border-r border-border bg-card transition-transform duration-300 ease-in-out lg:static ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+                    }`}
             >
                 {/* Header */}
                 <div className="flex h-16 items-center justify-between border-b border-border px-6">
@@ -107,11 +118,10 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                                 >
                                     {({ isActive }) => (
                                         <div
-                                            className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${
-                                                isActive
+                                            className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${isActive
                                                     ? "bg-primary text-white shadow-md"
                                                     : "text-slate-600 hover:bg-slate-100 hover:text-primary"
-                                            }`}
+                                                }`}
                                         >
                                             <Icon
                                                 size={22}
@@ -119,9 +129,8 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                                             />
 
                                             <span
-                                                className={`font-medium ${
-                                                    isActive ? "text-white" : "text-slate-600"
-                                                }`}
+                                                className={`font-medium ${isActive ? "text-white" : "text-slate-600"
+                                                    }`}
                                             >
                                                 {menu.title}
                                             </span>
@@ -134,7 +143,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                 </div>
 
                 {/* Footer */}
-                <div className="border-t border-border p-4">
+                <div className="shrink-0 border-t border-border p-4">
                     <button
                         onClick={handleLogout}
                         disabled={isLogout}
