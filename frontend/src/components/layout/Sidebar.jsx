@@ -76,7 +76,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
             {/* Sidebar */}
             <aside
-                className={`fixed top-0 left-0 z-50 flex h-screen lg:w-64 w-[90%] flex-col border-r border-border bg-card transition-transform duration-300 ease-in-out lg:static ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+                className={`fixed top-0 left-0 z-50 flex h-dvh lg:w-64 w-[90%] flex-col border-r border-border bg-card transition-transform duration-300 ease-in-out lg:static ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
                     }`}
             >
                 {/* Header */}
